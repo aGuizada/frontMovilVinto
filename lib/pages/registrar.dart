@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       home: const RegisterScreen(),
       theme: ThemeData(
         primaryColor: Colors.green,
-        accentColor: Colors.green,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green),
         inputDecorationTheme: InputDecorationTheme(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.green),
