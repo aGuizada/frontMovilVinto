@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vinto/controller/registro.dart';
 
 void main() => runApp(const MyApp());
 
@@ -39,6 +41,14 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class RegisterForm extends StatelessWidget {
+  final RegistroController registroController = Get.put(RegistroController());
+
+  final TextEditingController nombreController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController telefonoController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController rolIdController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,6 +58,7 @@ class RegisterForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
+              controller: nombreController,
               decoration: InputDecoration(
                 labelText: 'Nombre',
                 border: OutlineInputBorder(),
@@ -64,6 +75,7 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Correo electrónico',
                 border: OutlineInputBorder(),
@@ -80,6 +92,7 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: telefonoController,
               decoration: InputDecoration(
                 labelText: 'Número de Teléfono',
                 border: OutlineInputBorder(),
@@ -96,6 +109,7 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: passwordController,
               decoration: InputDecoration(
                 labelText: 'Contraseña',
                 border: OutlineInputBorder(),
@@ -112,12 +126,35 @@ class RegisterForm extends StatelessWidget {
               ),
               obscureText: true,
             ),
+            TextFormField(
+              controller: rolIdController,
+              decoration: InputDecoration(
+                labelText: 'Rol ID',
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green),
+                ),
+                labelStyle: TextStyle(color: Colors.green),
+              ),
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.green,
+              ),
+            ),
             SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Agrega la lógica para registrarse aquí
+                  registroController.registro(
+                    nombre: nombreController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                    numero_telefono: telefonoController.text,
+                    rol_id: int.parse(rolIdController.text),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
